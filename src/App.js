@@ -1,25 +1,69 @@
-import logo from './logo.svg';
-import './App.css';
+// import Login from './login';
+// import Todo from './todo';
+
+// function App() {
+//   const token = localStorage.getItem("token");
+
+//   return (
+//     <div className="App">
+//       {token ? <Todo /> : <Login />}
+//     </div>
+//   );
+// }
+
+// export default App;
+// import './App.css';
+// import Login from './login';
+
+// function App() {
+//   return (
+//     <div className="App">
+//       <Login />
+//     </div>
+//   );
+// }
+
+// export default App;
+// import Login from './login';
+// import Todo from './todo';
+
+// function App() {
+//   const token = localStorage.getItem("token");
+
+//   return (
+//     <div className="App">
+//       {token ? <Todo /> : <Login />}
+//     </div>
+//   );
+// }
+
+// export default App;
+
+import { useState } from "react";
+import Login from "./login";
+import Register from "./register";
+import Todo from "./todo";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    const [showRegister, setShowRegister] = useState(false);
+
+    const token = localStorage.getItem("token");
+
+    if (token) {
+        return <Todo />;
+    }
+
+    return (
+        <>
+            {
+                showRegister ?
+                <Register goToLogin={() => setShowRegister(false)} />
+                :
+                <Login goToRegister={() => setShowRegister(true)} />
+            }
+        </>
+    );
 }
 
 export default App;
