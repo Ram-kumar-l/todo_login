@@ -18,7 +18,7 @@ export default function Todo()
 
 
     // const apiUrl="http://localhost:5000";
-    const apiUrl = "https://your-backend.onrender.com";
+    const apiUrl = "https://todo-login-backend.onrender.com";
     
     
      const handlesubmit=()=>{
@@ -56,9 +56,9 @@ setDescription("");
          
      }
       
-     useEffect(()=>{
-        getitems()
-     },[])
+     useEffect(() => {
+    getitems();
+}, [getitems]);
 
     const getitems = useCallback(() => {
     fetch(apiUrl + "/todos", {
