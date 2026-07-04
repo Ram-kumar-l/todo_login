@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useCallback } from "react";
 
 export default function Todo()
 {
@@ -60,17 +60,17 @@ setDescription("");
         getitems()
      },[])
 
-     const getitems=()=>{
-        fetch(apiUrl+"/todos",{
-             headers:{
-        'Authorization': `Bearer ${token}`
-    }
-        })
-        .then((res)=>res.json())
-        .then((res)=>{
-            setTodos(res)
-        })
-     }
+    const getitems = useCallback(() => {
+    fetch(apiUrl + "/todos", {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+    .then((res) => res.json())
+    .then((res) => {
+        setTodos(res);
+    });
+}, [apiUrl, token]);
 
        const handleedit=(item)=>{
         setEditId(item._id);
