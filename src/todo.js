@@ -56,9 +56,7 @@ setDescription("");
          
      }
       
-     useEffect(() => {
-    getitems();
-}, [getitems]);
+     
 
     const getitems = useCallback(() => {
     fetch(apiUrl + "/todos", {
@@ -71,6 +69,10 @@ setDescription("");
         setTodos(res);
     });
 }, [apiUrl, token]);
+
+useEffect(() => {
+    getitems();
+}, [getitems]);
 
        const handleedit=(item)=>{
         setEditId(item._id);
