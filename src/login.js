@@ -6,8 +6,12 @@ export default function Login({ goToRegister }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
-    const handleLogin = () => {
-        fetch("https://todo-login-backend.onrender.com/login", {
+   const handleLogin = async () => {
+    try {
+
+        const apiUrl = "https://todo-login-backend.onrender.com";
+        
+        const res = await fetch(apiUrl + "/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -16,13 +20,22 @@ export default function Login({ goToRegister }) {
                 username,
                 password
             })
-        })
-        .then(res => res.json())
-        .then(data => {
-            localStorage.setItem("token", data.token);
-            window.location.reload();
         });
-    };
+
+        const data = await res.json();
+
+        if (res.ok) {
+            localStorage.setItem("token", data.token);
+            alert("Login successful");
+            window.location.reload();
+        } else {
+            alert(data.message);
+        }
+    } catch (err) {
+        console.log(err);
+        alert("Unable to connect to server");
+    }
+};
 
     return (
         <div className="login-container">
