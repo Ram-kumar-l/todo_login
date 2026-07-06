@@ -6,11 +6,41 @@ export default function Login({ goToRegister }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
-   const handleLogin = async () => {
+//    const handleLogin = async () => {
+//     try {
+
+//         const apiUrl = "https://todo-login-backend.onrender.com";
+
+//         const res = await fetch(apiUrl + "/login", {
+//             method: "POST",
+//             headers: {
+//                 "Content-Type": "application/json"
+//             },
+//             body: JSON.stringify({
+//                 username,
+//                 password
+//             })
+//         });
+
+//         const data = await res.json();
+
+//         if (res.ok) {
+//             localStorage.setItem("token", data.token);
+//             alert("Login successful");
+//             window.location.reload();
+//         } else {
+//             alert(data.message);
+//         }
+//     } catch (err) {
+//         console.log(err);
+//         alert("Unable to connect to server");
+//     }
+// };
+const handleLogin = async () => {
     try {
 
         const apiUrl = "https://todo-login-backend.onrender.com";
-        
+
         const res = await fetch(apiUrl + "/login", {
             method: "POST",
             headers: {
@@ -24,13 +54,24 @@ export default function Login({ goToRegister }) {
 
         const data = await res.json();
 
+        console.log("Status:", res.status);
+        console.log("Data:", data);
+
         if (res.ok) {
+
+            console.log("Token:", data.token);
+
             localStorage.setItem("token", data.token);
+
+            console.log("Stored:", localStorage.getItem("token"));
+
             alert("Login successful");
             window.location.reload();
+
         } else {
             alert(data.message);
         }
+
     } catch (err) {
         console.log(err);
         alert("Unable to connect to server");
