@@ -7,7 +7,7 @@ export default function Login({ goToRegister }) {
     const [password, setPassword] = useState("");
 
     const handleLogin = () => {
-        fetch("https://todo-login-backend.onrender.com", {
+        fetch("https://todo-login-backend.onrender.com/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

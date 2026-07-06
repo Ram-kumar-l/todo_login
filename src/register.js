@@ -14,16 +14,18 @@ export default function Register({ goToLogin }) {
         setError("");
 
         try {
-            const res = await fetch("https://todo-login-backend.onrender.com", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    username,
-                    password
-                })
-            });
+           const apiUrl = "https://todo-login-backend.onrender.com";
+
+const res = await fetch(apiUrl + "/register", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        username,
+        password
+    })
+});
 
             const data = await res.json();
 
